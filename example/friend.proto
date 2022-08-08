@@ -1,0 +1,24 @@
+syntax = "proto3";
+package fixbug;
+
+option cc_generic_services = true;//如果要生成java代码，把cc改成java
+
+message ResultCode{
+    int32 code=1;
+    bytes msg=2;
+}
+
+// 登录方法
+message GetFriendListReq{
+    uint32 userid=1;
+}
+message GetFriendListRsp{
+    ResultCode result=1;
+    repeated bytes friends = 2;
+}
+
+
+// 好友模块
+service FriendServiceRpc{
+    rpc GetFriendList(GetFriendListReq) returns(GetFriendListRsp);
+}

@@ -1,0 +1,35 @@
+syntax = "proto3";
+package fixbug;
+
+option cc_generic_services = true;//如果要生成java代码，把cc改成java
+
+message ResultCode{
+    int32 code=1;
+    bytes msg=2;
+}
+
+// 登录方法
+message LoginReq{
+    bytes name=1;
+    bytes pwd =2;
+}
+message LoginRsp{
+    ResultCode result=1;
+    bool data=2;
+}
+
+// 注册方法
+message RegisterReq{
+    uint32 id=1;
+    bytes name=2;
+    bytes pwd =3;
+}
+message RegisterRsp{
+    ResultCode result=1;
+    bool data=2;
+}
+
+service UserServiceRpc{
+    rpc Login(LoginReq) returns(LoginRsp);
+    rpc Register(RegisterReq) returns(RegisterRsp);
+}
